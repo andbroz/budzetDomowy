@@ -1,0 +1,25 @@
+{
+  "name": "budzetdomowy",
+  "version": "1.0.0",
+  "description": "App made for Learning JS",
+  "main": "app.js",
+  "dependencies": {
+    "prettier": "^1.19.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.7.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andbroz/budzetDomowy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andbroz/budzetDomowy/issues"
+  },
+  "homepage": "https://github.com/andbroz/budzetDomowy#readme"
+}
