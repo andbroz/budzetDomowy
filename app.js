@@ -180,6 +180,12 @@ const UIController = (function() {
     return (type === 'inc' ? '+ ' : '- ') + int + '.' + dec;
   };
 
+  const nodeListForEach = function(list, callback) {
+    for (let i = 0; i < list.length; i++) {
+      callback(list[i], i);
+    }
+  };
+
   return {
     getInput: function() {
       return {
@@ -265,11 +271,6 @@ const UIController = (function() {
        * @param {*} list list of nodes
        * @param {*} callback function called on each node
        */
-      const nodeListForEach = function(list, callback) {
-        for (let i = 0; i < list.length; i++) {
-          callback(list[i], i);
-        }
-      };
 
       nodeListForEach(fields, function(current, index) {
         //update percentages
@@ -309,6 +310,27 @@ const UIController = (function() {
     },
 
     /**
+     * change outline color on description input field based on type
+     */
+    changedType: function() {
+      let fields;
+
+      fields = document.querySelectorAll(
+        DOMStrings.inputType +
+          ',' +
+          DOMStrings.inputDescription +
+          ',' +
+          DOMStrings.inputValue,
+      );
+
+      nodeListForEach(fields, cur => {
+        cur.classList.toggle('red-focus');
+      });
+
+      document.querySelector(DOMStrings.inputBtn).classList.toggle('red');
+    },
+
+    /**
      * @description gets DOMStrings object
      */
     getDOMStrings: function() {
@@ -324,8 +346,8 @@ const UIController = (function() {
 const controller = (function(budgetCtrl, UICtrl) {
   const setupEventListeners = function() {
     const DOM = UICtrl.getDOMStrings();
-
     document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
+
     document.addEventListener('keypress', function(event) {
       if (event.keyCode === 13 || event.which === 13) {
         ctrlAddItem();
@@ -336,6 +358,10 @@ const controller = (function(budgetCtrl, UICtrl) {
     document
       .querySelector(DOM.container)
       .addEventListener('click', ctrlDeleteItem);
+
+    document
+      .querySelector(DOM.inputType)
+      .addEventListener('change', UICtrl.changedType);
   };
 
   const updateBudget = function() {
