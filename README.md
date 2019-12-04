@@ -25,3 +25,5 @@ Based on Udemy Course
 ### CONTROLLER Module
 
 - [ ] Add event handler
+
+![Final architecture](final_architecture.png)
