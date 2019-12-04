@@ -151,6 +151,7 @@ const UIController = (function() {
     percentageLabel: '.budget__expenses--percentage',
     container: '.container',
     expensesPercLabel: '.item__percentage',
+    dateLabel: '.budget__title--month',
   };
 
   /**
@@ -280,6 +281,34 @@ const UIController = (function() {
       });
     },
     /**
+     * displays Current Month on UI
+     */
+    displayMonth: function() {
+      let now, year, month, monthsNames;
+
+      monthsNames = [
+        'Styczeń',
+        'Luty',
+        'Marzec',
+        'Kwiecień',
+        'Maj',
+        'Czerwiec',
+        'Lipiec',
+        'Sierpień',
+        'Wrzesień',
+        'Październik',
+        'Listopad',
+        'Grudzień',
+      ];
+      now = new Date();
+      year = now.getFullYear();
+      month = now.getMonth();
+
+      document.querySelector(DOMStrings.dateLabel).textContent =
+        monthsNames[month] + ' ' + year;
+    },
+
+    /**
      * @description gets DOMStrings object
      */
     getDOMStrings: function() {
@@ -372,6 +401,7 @@ const controller = (function(budgetCtrl, UICtrl) {
   return {
     init: function() {
       console.log('App has started');
+      UICtrl.displayMonth();
       UICtrl.displayBudget({
         budget: 0,
         totalInc: 0,
